@@ -1,4 +1,4 @@
-package com.ldy.dylibrary.TitleBar;
+package com.ldy.dylibrary.titlebar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,9 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ldy.dylibrary.R;
-import com.ldy.dylibrary.TitleBar.data.TitleItem;
+import com.ldy.dylibrary.titlebar.data.TitleItem;
 import com.ldy.dylibrary.util.PixelUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -93,6 +94,9 @@ public class TitleBar extends FrameLayout {
      */
     public void addNavigations(List<TitleItem> list) {
         if (list != null) {
+            if (navigationList == null) {
+                navigationList = new ArrayList<>();
+            }
             navigationList.clear();
             navigationList.addAll(list);
             loadNavigation();
@@ -132,6 +136,9 @@ public class TitleBar extends FrameLayout {
      */
     public void addMenus(List<TitleItem> list) {
         if (list != null) {
+            if (menuList == null) {
+                menuList = new ArrayList<>();
+            }
             menuList.clear();
             menuList.addAll(list);
             loadMenu();

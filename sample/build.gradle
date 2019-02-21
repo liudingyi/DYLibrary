@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.ldy.dylibrary"
+        applicationId "com.ldy.sample"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
@@ -19,4 +19,5 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.github.liudingyi:DYLibrary:1.0.0'
 }

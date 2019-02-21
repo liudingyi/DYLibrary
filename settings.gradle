@@ -1,1 +1,1 @@
-include ':app', ':dylibrary2', ':dylibrary'
+include ':sample', ':dylibrary'

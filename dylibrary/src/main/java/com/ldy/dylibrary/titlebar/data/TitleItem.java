@@ -1,4 +1,4 @@
-package com.ldy.dylibrary.TitleBar.data;
+package com.ldy.dylibrary.titlebar.data;
 
 /**
  * 导航栏和菜单栏每项的数据结构
