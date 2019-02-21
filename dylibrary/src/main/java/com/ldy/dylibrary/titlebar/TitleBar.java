@@ -63,11 +63,11 @@ public class TitleBar extends FrameLayout {
         this.context = context;
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleBar);
-            titleSize = typedArray.getDimensionPixelSize(R.styleable.TitleBar_title_size, 18);
+            titleSize = typedArray.getInteger(R.styleable.TitleBar_title_size, 18);
             titleColor = typedArray.getColor(R.styleable.TitleBar_title_color, Color.BLACK);
-            navigationTextSize = typedArray.getDimensionPixelSize(R.styleable.TitleBar_navigation_text_size, 14);
+            navigationTextSize = typedArray.getInteger(R.styleable.TitleBar_navigation_text_size, 14);
             navigationTextColor = typedArray.getColor(R.styleable.TitleBar_navigation_text_color, Color.BLACK);
-            menuTextSize = typedArray.getDimensionPixelSize(R.styleable.TitleBar_menu_text_size, 14);
+            menuTextSize = typedArray.getInteger(R.styleable.TitleBar_menu_text_size, 14);
             menuTextColor = typedArray.getColor(R.styleable.TitleBar_menu_text_color, Color.BLACK);
             typedArray.recycle();
         }

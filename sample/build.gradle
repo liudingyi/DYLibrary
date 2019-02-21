@@ -19,5 +19,5 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.github.liudingyi:DYLibrary:1.0.0'
+    implementation 'com.github.liudingyi:DYLibrary:v1.0.0.1'
 }

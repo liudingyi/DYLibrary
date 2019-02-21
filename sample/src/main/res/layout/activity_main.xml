@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ldy.dylibrary.TitleBar.TitleBar
+    <com.ldy.dylibrary.titlebar.TitleBar
         android:id="@+id/mTitleBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title_color="#ffffff" />
+        app:title_color="#fff"/>
 
 </LinearLayout>
