@@ -5,27 +5,36 @@ package com.ldy.dylibrary.titlebar.data;
  */
 public class TitleItem {
 
+    private int itemId;//id
     private String content;//文本
     private int background;//文本背景
     private int src;//图片资源
 
-    public TitleItem(int src) {
+    public TitleItem(int itemId, int src) {
+        this.itemId = itemId;
         this.src = src;
     }
 
-    public TitleItem(String content) {
+    public TitleItem(int itemId, String content) {
+        this.itemId = itemId;
         this.content = content;
     }
 
-    public TitleItem(String content, int background) {
+    public TitleItem(int itemId, String content, int background) {
+        this.itemId = itemId;
         this.content = content;
         this.background = background;
     }
 
-    public TitleItem(String content, int background, int src) {
+    public TitleItem(int itemId, String content, int background, int src) {
+        this.itemId = itemId;
         this.content = content;
         this.background = background;
         this.src = src;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
     public void setContent(String content) {
@@ -38,6 +47,10 @@ public class TitleItem {
 
     public void setSrc(int src) {
         this.src = src;
+    }
+
+    public int getItemId() {
+        return itemId;
     }
 
     public String getContent() {

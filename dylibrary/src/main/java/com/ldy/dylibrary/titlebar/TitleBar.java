@@ -5,7 +5,9 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -17,7 +19,6 @@ import com.ldy.dylibrary.R;
 import com.ldy.dylibrary.titlebar.data.TitleItem;
 import com.ldy.dylibrary.util.PixelUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,9 +39,6 @@ public class TitleBar extends FrameLayout {
     private int menuTextSize;//菜单栏文字大小
     private int menuTextColor;//菜单栏文字颜色
 
-    private List<TitleItem> navigationList;
-    private List<TitleItem> menuList;
-
     public TitleBar(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         //初始化
@@ -51,6 +49,18 @@ public class TitleBar extends FrameLayout {
         super(context, attrs, defStyleAttr);
         //初始化
         init(context, attrs);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int mode = MeasureSpec.getMode(heightMeasureSpec);
+        if (mode != MeasureSpec.EXACTLY) {
+            int height = PixelUtils.dp2px(context, 48f);
+            int newHeightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
+            super.onMeasure(widthMeasureSpec, newHeightMeasureSpec);
+        } else {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        }
     }
 
     /**
@@ -88,18 +98,34 @@ public class TitleBar extends FrameLayout {
     }
 
     /**
+     * 设置标题
+     *
+     * @param resId int
+     */
+    public void setTitle(@StringRes int resId) {
+        mTvTitle.setText(resId);
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title String
+     */
+    public void setTitle(String title) {
+        mTvTitle.setText(title);
+    }
+
+    /**
      * 添加导航栏项
      *
-     * @param list List<TitleItem>
+     * @param navigationList List<TitleItem>
      */
-    public void addNavigations(List<TitleItem> list) {
-        if (list != null) {
-            if (navigationList == null) {
-                navigationList = new ArrayList<>();
+    public void addNavigation(List<TitleItem> navigationList) {
+        if (navigationList != null) {
+            mLayoutNavigation.removeAllViews();
+            for (TitleItem item : navigationList) {
+                addNavigation(item);
             }
-            navigationList.clear();
-            navigationList.addAll(list);
-            loadNavigation();
         }
     }
 
@@ -118,30 +144,16 @@ public class TitleBar extends FrameLayout {
     }
 
     /**
-     * 加载导航栏
-     */
-    private void loadNavigation() {
-        if (navigationList != null) {
-            mLayoutNavigation.removeAllViews();
-            for (TitleItem item : navigationList) {
-                addNavigation(item);
-            }
-        }
-    }
-
-    /**
      * 添加菜单栏项
      *
-     * @param list List<TitleItem>
+     * @param menuList List<TitleItem>
      */
-    public void addMenus(List<TitleItem> list) {
-        if (list != null) {
-            if (menuList == null) {
-                menuList = new ArrayList<>();
+    public void addMenus(List<TitleItem> menuList) {
+        if (menuList != null) {
+            mLayoutMenu.removeAllViews();
+            for (TitleItem item : menuList) {
+                addMenu(item);
             }
-            menuList.clear();
-            menuList.addAll(list);
-            loadMenu();
         }
     }
 
@@ -160,18 +172,6 @@ public class TitleBar extends FrameLayout {
     }
 
     /**
-     * 加载菜单栏
-     */
-    private void loadMenu() {
-        if (menuList != null) {
-            mLayoutNavigation.removeAllViews();
-            for (TitleItem item : menuList) {
-                addMenu(item);
-            }
-        }
-    }
-
-    /**
      * 加载 TitleItem
      *
      * @param item TitleItem
@@ -184,6 +184,7 @@ public class TitleBar extends FrameLayout {
             } else {
                 view = createText(item.getContent(), item.getBackground(), isNavigation);
             }
+            view.setId(item.getItemId());
         }
         return view;
     }
@@ -216,8 +217,9 @@ public class TitleBar extends FrameLayout {
             textView.setPadding(paddingH, paddingV, paddingH, paddingV);
             textView.setBackgroundResource(background);
         } else {
-            int paddingH = PixelUtils.dp2px(context, 12f);
+            int paddingH = PixelUtils.dp2px(context, isNavigation ? 6f : 12f);
             textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            textView.setGravity(Gravity.CENTER);
             textView.setPadding(paddingH, 0, paddingH, 0);
         }
         textView.setText(text);
@@ -229,6 +231,65 @@ public class TitleBar extends FrameLayout {
             textView.setTextSize(menuTextSize);
         }
         return textView;
+    }
+
+    /**
+     * 设置导航栏的点击事件
+     *
+     * @param navigationClickListener OnClickListener
+     */
+    public void setNavigationClickListener(OnClickListener navigationClickListener) {
+        for (int i = 0; i < mLayoutNavigation.getChildCount(); i++) {
+            mLayoutNavigation.getChildAt(i).setOnClickListener(navigationClickListener);
+        }
+    }
+
+    /**
+     * 设置菜单栏的点击事件
+     *
+     * @param menuClickListener OnClickListener
+     */
+    public void setMenuClickListener(OnClickListener menuClickListener) {
+        for (int i = 0; i < mLayoutMenu.getChildCount(); i++) {
+            mLayoutMenu.getChildAt(i).setOnClickListener(menuClickListener);
+        }
+    }
+
+    /**
+     * 清空导航栏
+     */
+    public void clearNavigation() {
+        mLayoutNavigation.removeAllViews();
+    }
+
+    /**
+     * 清空菜单栏
+     */
+    public void clearMenu() {
+        mLayoutMenu.removeAllViews();
+    }
+
+    /**
+     * 设置TitleItems是否显示
+     *
+     * @param itemId    int
+     * @param isVisible boolean
+     */
+    public void setVisible(int itemId, boolean isVisible) {
+        for (int i = 0; i < mLayoutNavigation.getChildCount(); i++) {
+            View view = mLayoutNavigation.getChildAt(i);
+            if (view.getId() == itemId) {
+                view.setVisibility(isVisible ? VISIBLE : GONE);
+                return;
+            }
+        }
+        for (int i = 0; i < mLayoutMenu.getChildCount(); i++) {
+            View view = mLayoutMenu.getChildAt(i);
+            if (view.getId() == itemId) {
+                view.setVisibility(isVisible ? VISIBLE : GONE);
+                break;
+            }
+        }
     }
 
 }
