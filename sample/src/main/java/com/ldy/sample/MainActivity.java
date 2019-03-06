@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
         List<TitleItem> items = new ArrayList<>();
         items.add(new TitleItem(BACK_ID, R.drawable.ic_back));
         items.add(new TitleItem(BACK_TEXT_ID, "返回"));
-        mTitleBar.addNavigation(items);
+        mTitleBar.addNavigations(items);
         List<TitleItem> items1 = new ArrayList<>();
         items1.add(new TitleItem(SHARE_ID, "分享"));
         items1.add(new TitleItem(SHARE1_ID, "分享", R.drawable.shape_stroke_white));

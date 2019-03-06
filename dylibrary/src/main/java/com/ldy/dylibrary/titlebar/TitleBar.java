@@ -120,7 +120,7 @@ public class TitleBar extends FrameLayout {
      *
      * @param navigationList List<TitleItem>
      */
-    public void addNavigation(List<TitleItem> navigationList) {
+    public void addNavigations(List<TitleItem> navigationList) {
         if (navigationList != null) {
             mLayoutNavigation.removeAllViews();
             for (TitleItem item : navigationList) {
