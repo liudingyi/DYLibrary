@@ -1,4 +1,4 @@
-1.在project中的build.gradle
+### 1.在project中的build.gradle
 
     allprojects {
         repositories {
@@ -8,7 +8,7 @@
         }
     }
 
-2.在module中的build.gradle
+### 2.在module中的build.gradle
 
     dependencies {
         ...
