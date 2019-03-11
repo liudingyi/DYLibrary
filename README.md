@@ -13,5 +13,5 @@
     dependencies {
         ...
         //添加DYLibrary
-        implementation 'com.github.liudingyi:DYLibrary:v1.0.1'
+        implementation 'com.github.liudingyi:DYLibrary:@version'
     }
