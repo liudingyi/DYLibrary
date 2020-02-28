@@ -20,12 +20,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTitleBar = findViewById(R.id.mTitleBar);
-//        mTitleBar.addNavigation(new TitleItem(BACK_ID, R.drawable.ic_back));
-//        mTitleBar.addNavigation(new TitleItem(BACK_TEXT_ID, "返回"));
-//        mTitleBar.addMenu(new TitleItem(SHARE_ID, "分享"));
-//        mTitleBar.addMenu(new TitleItem(SHARE1_ID, "分享", R.drawable.shape_stroke_white));
-//        mTitleBar.addMenu(new TitleItem(SHARE2_ID, "分享", R.drawable.shape_stroke_white, R.drawable.ic_share));
-
         List<TitleItem> items = new ArrayList<>();
         items.add(new TitleItem(R.id.iv_back, R.drawable.ic_back));
         items.add(new TitleItem(R.id.tv_back, "返回"));
