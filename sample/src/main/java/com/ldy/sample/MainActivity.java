@@ -15,12 +15,6 @@ public class MainActivity extends Activity {
 
     private TitleBar mTitleBar;
 
-    private final int BACK_ID = 100;
-    private final int BACK_TEXT_ID = 101;
-    private final int SHARE_ID = 102;
-    private final int SHARE1_ID = 103;
-    private final int SHARE2_ID = 104;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,23 +27,23 @@ public class MainActivity extends Activity {
 //        mTitleBar.addMenu(new TitleItem(SHARE2_ID, "分享", R.drawable.shape_stroke_white, R.drawable.ic_share));
 
         List<TitleItem> items = new ArrayList<>();
-        items.add(new TitleItem(BACK_ID, R.drawable.ic_back));
-        items.add(new TitleItem(BACK_TEXT_ID, "返回"));
+        items.add(new TitleItem(R.id.iv_back, R.drawable.ic_back));
+        items.add(new TitleItem(R.id.tv_back, "返回"));
         mTitleBar.addNavigations(items);
         List<TitleItem> items1 = new ArrayList<>();
-        items1.add(new TitleItem(SHARE_ID, "分享"));
-        items1.add(new TitleItem(SHARE1_ID, "分享", R.drawable.shape_stroke_white));
-        items1.add(new TitleItem(SHARE2_ID, "分享", R.drawable.shape_stroke_white, R.drawable.ic_share));
+        items1.add(new TitleItem(R.id.tv_share1, "分享"));
+        items1.add(new TitleItem(R.id.tv_share2, "分享", R.drawable.shape_stroke_white));
+        items1.add(new TitleItem(R.id.tv_share3, "分享", R.drawable.shape_stroke_white, R.drawable.ic_share));
         mTitleBar.addMenus(items1);
 
         mTitleBar.setNavigationClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case BACK_ID:
+                    case R.id.iv_back:
                         Toast.makeText(MainActivity.this, "back", Toast.LENGTH_SHORT).show();
                         break;
-                    case BACK_TEXT_ID:
+                    case R.id.tv_back:
                         Toast.makeText(MainActivity.this, "back text", Toast.LENGTH_SHORT).show();
                         break;
                     default:
@@ -61,13 +55,13 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case SHARE_ID:
+                    case R.id.tv_share1:
                         Toast.makeText(MainActivity.this, "share", Toast.LENGTH_SHORT).show();
                         break;
-                    case SHARE1_ID:
+                    case R.id.tv_share2:
                         Toast.makeText(MainActivity.this, "share one", Toast.LENGTH_SHORT).show();
                         break;
-                    case SHARE2_ID:
+                    case R.id.tv_share3:
                         Toast.makeText(MainActivity.this, "share two", Toast.LENGTH_SHORT).show();
                         break;
                     default:

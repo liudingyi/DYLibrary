@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.ldy.dylibrary.R;
 import com.ldy.dylibrary.titlebar.data.TitleItem;
-import com.ldy.dylibrary.util.PhoneBarUtils;
 import com.ldy.dylibrary.util.PixelUtils;
 
 import java.util.List;
@@ -41,7 +40,6 @@ public class TitleBar extends FrameLayout {
     private int navigationTextColor;//导航栏文字颜色
     private int menuTextSize;//菜单栏文字大小
     private int menuTextColor;//菜单栏文字颜色
-    private boolean isImmersive;//是否是沉浸式
     private int titleBarBackground;//标题容器的背景色
 
     public TitleBar(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -62,12 +60,6 @@ public class TitleBar extends FrameLayout {
         int newHeightMeasureSpec = heightMeasureSpec;
         if (mode != MeasureSpec.EXACTLY) {
             int height = PixelUtils.dp2px(context, 48f);
-            if (isImmersive) {
-                height += PhoneBarUtils.getStatusBarHeight(getContext());
-            }
-            newHeightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
-        } else if (isImmersive) {
-            int height = MeasureSpec.getSize(heightMeasureSpec) + PhoneBarUtils.getStatusBarHeight(getContext());
             newHeightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
         }
         super.onMeasure(widthMeasureSpec, newHeightMeasureSpec);
@@ -89,7 +81,6 @@ public class TitleBar extends FrameLayout {
             navigationTextColor = typedArray.getColor(R.styleable.TitleBar_navigation_text_color, Color.GRAY);
             menuTextSize = typedArray.getInteger(R.styleable.TitleBar_menu_text_size, 14);
             menuTextColor = typedArray.getColor(R.styleable.TitleBar_menu_text_color, Color.GRAY);
-            isImmersive = typedArray.getBoolean(R.styleable.TitleBar_is_immersive, false);
             titleBarBackground = typedArray.getResourceId(R.styleable.TitleBar_title_bar_background, Color.TRANSPARENT);
             typedArray.recycle();
         }
@@ -98,10 +89,6 @@ public class TitleBar extends FrameLayout {
         mTvTitle = findViewById(R.id.tv_title);
         mLayoutNavigation = findViewById(R.id.layout_navigation);
         mLayoutMenu = findViewById(R.id.layout_menu);
-        //初始化沉浸式
-        if (isImmersive) {
-            ((LayoutParams) mLayoutTitleBar.getLayoutParams()).topMargin = PhoneBarUtils.getStatusBarHeight(context);
-        }
         //初始化TitleBar背景
         if (titleBarBackground > 0) {
             mLayoutTitleBar.setBackgroundResource(titleBarBackground);

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="iv_back" type="id">100</item>
+    <item name="tv_back" type="id">101</item>
+    <item name="tv_share1" type="id">102</item>
+    <item name="tv_share2" type="id">103</item>
+    <item name="tv_share3" type="id">104</item>
+</resources>
