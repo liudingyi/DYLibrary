@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ldy.dylibrary.titlebar.TitleBar;
-import com.ldy.dylibrary.titlebar.data.TitleItem;
+import com.ldy.library.titlebar.TitleBar;
+import com.ldy.library.titlebar.data.TitleItem;
 
 import java.util.ArrayList;
 import java.util.List;

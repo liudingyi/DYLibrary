@@ -1,1 +1,1 @@
-include ':sample', ':dylibrary'
+include ':sample', ':library'

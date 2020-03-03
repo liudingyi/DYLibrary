@@ -1,4 +1,4 @@
-package com.ldy.dylibrary.util;
+package com.ldy.library.util;
 
 import android.content.Context;
 import android.util.TypedValue;

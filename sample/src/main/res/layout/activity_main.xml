@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ldy.dylibrary.titlebar.TitleBar
+    <com.ldy.library.titlebar.TitleBar
         android:id="@+id/mTitleBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.ldy.dylibrary.titlebar;
+package com.ldy.library.titlebar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -16,9 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.ldy.dylibrary.R;
-import com.ldy.dylibrary.titlebar.data.TitleItem;
-import com.ldy.dylibrary.util.PixelUtils;
+import com.ldy.library.R;
+import com.ldy.library.titlebar.data.TitleItem;
+import com.ldy.library.util.PixelUtils;
 
 import java.util.List;
 
