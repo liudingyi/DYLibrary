@@ -47,7 +47,7 @@ class ImmerseKitKat {
             TypedValue typedValue = new TypedValue();
             if (activity.getTheme().resolveAttribute(R.attr.actionBarSize, typedValue, true)) {
                 int actionBarHeight = TypedValue.complexToDimensionPixelSize(typedValue.data, activity.getResources().getDisplayMetrics());
-                Eyes.setContentTopPadding(activity, actionBarHeight);
+                Immerse.setContentTopPadding(activity, actionBarHeight);
             }
         }
     }
