@@ -3,9 +3,6 @@ package com.ldy.library.titlebar;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -21,6 +18,10 @@ import com.ldy.library.titlebar.data.TitleItem;
 import com.ldy.library.util.PixelUtils;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 /**
  * 标题栏
@@ -124,6 +125,15 @@ public class TitleBar extends FrameLayout {
     }
 
     /**
+     * 设置标题颜色
+     *
+     * @param titleColor int
+     */
+    public void setTitleColor(int titleColor) {
+        mTvTitle.setTextColor(titleColor);
+    }
+
+    /**
      * 添加导航栏项
      *
      * @param navigationList List<TitleItem>
@@ -152,6 +162,21 @@ public class TitleBar extends FrameLayout {
     }
 
     /**
+     * 添加导航栏项
+     *
+     * @param index int
+     * @param item  TitleItem
+     */
+    public void addNavigation(int index, TitleItem item) {
+        if (item != null) {
+            View view = getTitleItem(item, true);
+            if (view != null) {
+                mLayoutNavigation.addView(view, index);
+            }
+        }
+    }
+
+    /**
      * 添加菜单栏项
      *
      * @param menuList List<TitleItem>
@@ -175,6 +200,21 @@ public class TitleBar extends FrameLayout {
             View view = getTitleItem(item, false);
             if (view != null) {
                 mLayoutMenu.addView(view);
+            }
+        }
+    }
+
+    /**
+     * 添加菜单栏项
+     *
+     * @param index int
+     * @param item  TitleItem
+     */
+    public void addMenu(int index, TitleItem item) {
+        if (item != null) {
+            View view = getTitleItem(item, false);
+            if (view != null) {
+                mLayoutMenu.addView(view, index);
             }
         }
     }
@@ -284,20 +324,73 @@ public class TitleBar extends FrameLayout {
      * @param isVisible boolean
      */
     public void setVisible(int itemId, boolean isVisible) {
+        View view = getNavigationItem(itemId);
+        if (view != null) {
+            view.setVisibility(isVisible ? VISIBLE : GONE);
+            return;
+        }
+        view = getMenuItem(itemId);
+        if (view != null) {
+            view.setVisibility(isVisible ? VISIBLE : GONE);
+        }
+    }
+
+    /**
+     * 更新指定项的导航栏item
+     *
+     * @param index int
+     * @param item  TitleItem
+     */
+    public void updateNavigationItem(int index, TitleItem item) {
+        if (mLayoutNavigation.getChildCount() > index) {
+            mLayoutNavigation.removeViewAt(index);
+            addNavigation(index, item);
+        }
+    }
+
+    /**
+     * 更新指定项的菜单栏item
+     *
+     * @param index int
+     * @param item  TitleItem
+     */
+    public void updateMenuItem(int index, TitleItem item) {
+        if (mLayoutMenu.getChildCount() > index) {
+            mLayoutMenu.removeViewAt(index);
+            addMenu(index, item);
+        }
+    }
+
+    /**
+     * 获取指定id的导航栏view
+     *
+     * @param itemId int
+     * @return View
+     */
+    public View getNavigationItem(int itemId) {
         for (int i = 0; i < mLayoutNavigation.getChildCount(); i++) {
             View view = mLayoutNavigation.getChildAt(i);
             if (view.getId() == itemId) {
-                view.setVisibility(isVisible ? VISIBLE : GONE);
-                return;
+                return view;
             }
         }
+        return null;
+    }
+
+    /**
+     * 获取指定id的菜单栏view
+     *
+     * @param itemId int
+     * @return View
+     */
+    public View getMenuItem(int itemId) {
         for (int i = 0; i < mLayoutMenu.getChildCount(); i++) {
             View view = mLayoutMenu.getChildAt(i);
             if (view.getId() == itemId) {
-                view.setVisibility(isVisible ? VISIBLE : GONE);
-                break;
+                return view;
             }
         }
+        return null;
     }
 
 }

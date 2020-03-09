@@ -29,7 +29,6 @@ public class MainActivity extends Activity {
         items1.add(new TitleItem(R.id.tv_share2, "分享", R.drawable.shape_stroke_white));
         items1.add(new TitleItem(R.id.tv_share3, "分享", R.drawable.shape_stroke_white, R.drawable.ic_share));
         mTitleBar.addMenus(items1);
-
         mTitleBar.setNavigationClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
