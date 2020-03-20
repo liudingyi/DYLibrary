@@ -16,14 +16,6 @@ import androidx.core.view.ViewCompat;
 
 public class Immerse {
 
-    public static void setStatusBarColor(Activity activity, int statusColor) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ImmerseLollipop.setStatusBarColor(activity, statusColor);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            ImmerseKitKat.setStatusBarColor(activity, statusColor);
-        }
-    }
-
     public static void translucentStatusBar(Activity activity) {
         translucentStatusBar(activity, false);
     }
@@ -36,6 +28,12 @@ public class Immerse {
         }
     }
 
+    /**
+     * 字体黑色
+     *
+     * @param activity
+     * @param color
+     */
     public static void setStatusBarLightMode(Activity activity, int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //判断是否为小米或魅族手机，如果是则将状态栏文字改为黑色
@@ -61,6 +59,50 @@ public class Immerse {
                     ViewCompat.requestApplyInsets(mChildView);
                 }
             }
+        }
+    }
+
+    /**
+     * 字体白色
+     *
+     * @param activity
+     * @param color
+     */
+    public static void setStatusBarDarkMode(Activity activity, int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //判断是否为小米或魅族手机，如果是则将状态栏文字改为黑色
+            if (MIUISetStatusBarLightMode(activity, false) || FlymeSetStatusBarLightMode(activity, false)) {
+                //设置状态栏为指定颜色
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0
+                    activity.getWindow().setStatusBarColor(color);
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4
+                    //调用修改状态栏颜色的方法
+                    setStatusBarColor(activity, color);
+                }
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                //如果是6.0以上将状态栏文字改为黑色，并设置状态栏颜色
+                activity.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                activity.getWindow().setStatusBarColor(color);
+
+                //fitsSystemWindow 为 false, 不预留系统栏位置.
+                ViewGroup mContentView = activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT);
+                View mChildView = mContentView.getChildAt(0);
+                mContentView.setClipToPadding(true);
+                mContentView.setFitsSystemWindows(true);
+                if (mChildView != null) {
+                    mChildView.setFitsSystemWindows(true);
+                    ViewCompat.requestApplyInsets(mChildView);
+                }
+            }
+        }
+    }
+
+    public static void setStatusBarColor(Activity activity, int statusColor) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ImmerseLollipop.setStatusBarColor(activity, statusColor);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            ImmerseKitKat.setStatusBarColor(activity, statusColor);
         }
     }
 
