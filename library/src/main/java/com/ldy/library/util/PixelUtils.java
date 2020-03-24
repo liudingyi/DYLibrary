@@ -23,6 +23,18 @@ public class PixelUtils {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, context.getResources().getDisplayMetrics());
     }
 
+    //px转换为sp
+    public static int px2sp(Context context, float pxValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / fontScale + 0.5f);
+    }
+
+    //px转换为dp
+    public static int px2dp(Context context, float pxValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / fontScale + 0.5f);
+    }
+
     // 获取屏幕宽度
     public static int getScreenWidth(Context context) {
         return context.getResources().getDisplayMetrics().widthPixels;
